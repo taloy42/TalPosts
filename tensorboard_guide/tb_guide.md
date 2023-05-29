@@ -1,4 +1,4 @@
-# Train Python Code
+# In the Python Train Code
 
 * import the `TensorBoardLogger`:
 
@@ -52,7 +52,7 @@ def train(args):
     )
 ```
 
-# Estimator Notebook in Sagemaker
+# In the Estimator Notebook in Sagemaker
 
 * import the `TensorBoardOutputConfig`:
 ```python
@@ -95,7 +95,7 @@ estimator.fit({"training": training_dataset_s3_path}, logs=True, wait=False)
 ```
 
 
-# TensorBoard
+# In TensorBoard
 
 We can access tensorboard with the following command in our estimator notebook:
 ```python
