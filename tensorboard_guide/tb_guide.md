@@ -121,11 +121,11 @@ and then enter the link and continue from step 6, or we can access it from sagea
 
 ![step 1](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/1.png)
 
-2. click on your domain, in our case `sarine-prototype-engagement`
+2. click on your domain, in our case `sarine-...`
 
 ![step 2](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/2.png)
 
-3. click on your username
+3. click on your username, `tallevy` in my case
 
 ![step 3](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/3.png)
 
