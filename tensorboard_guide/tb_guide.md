@@ -112,7 +112,7 @@ which will print a url like so:
 ```
 >>> Navigate to the following URL:
 
->>> https://d-iaxxq4mqt9za.studio.eu-west-1.sagemaker.aws/tensorboard/default/data/plugin/sagemaker_data_manager/add_folder_or_job?Redirect=True&Name=pytorch-training-2023-05-28-10-47-13-388
+>>> https://<id>.studio.<region>.sagemaker.aws/tensorboard/default/data/plugin/sagemaker_data_manager/add_folder_or_job?Redirect=True&Name=<training_job_name>
 ```
 
 and then enter the link and continue from step 6, or we can access it from sageamker and start from step 1:
