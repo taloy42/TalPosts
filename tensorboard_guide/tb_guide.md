@@ -121,7 +121,7 @@ and then enter the link and continue from step 6, or we can access it from sagea
 
 ![step 1](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/1.png)
 
-2. click on your domain, in our case `sarine-...`
+2. click on your domain, in our case `MyDomain`
 
 ![step 2](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/2.png)
 
