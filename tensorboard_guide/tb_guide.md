@@ -119,46 +119,46 @@ and then enter the link and continue from step 6, or we can access it from sagea
 
 1. search for `amazon sagemaker` and click it
 
-![step 1](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/1.png)
+![step 1](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/1.png)
 
 2. click on your domain, in our case `MyDomain`
 
-![step 2](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/2.png)
+![step 2](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/2.png)
 
 3. click on your username, `tallevy` in my case
 
-![step 3](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/3.png)
+![step 3](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/3.png)
 
 4. click `Launch`
 
-![step 4](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/4.png)
+![step 4](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/4.png)
 
 5. click on `TensorBoard`
 
-![step 5](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/5.png)
+![step 5](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/5.png)
 
 6. now we can see all of the training jobs that were run with `Tensorboard`.
 
-![step 6](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/6.png)
+![step 6](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/6.png)
 
 7. We can click on the info button next to the training job's name to see more info about it
 
-![step 7](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/7.png)
+![step 7](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/7.png)
 
 8. for example we can see the number of epochs (and all of the other hyperparameters). we can now close the info
 
-![step 8](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/8.png)
+![step 8](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/8.png)
 
 9. we can click on the checkbox next to the training job to select it (we can choose multiple) and then select `Add Selected Jobs`
 
-![step 9](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/9.png)
+![step 9](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/9.png)
 
 10. now two new tabs have opened, `Time Series` and `Scalars`. we can monitor our logged valued using both. in the next step we clicked on `Time Series`
 
-![step 10](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/10.png)
+![step 10](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/10.png)
 
 11. we can see the graph with `epochs` as the X-axis (listed as `step`). in each graph there are 2 plots, a bold one and a faded one. the faded one is the raw values, and the bold one is the smoothed values, by the [exponential smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing) function, with $\alpha$ set to the `Smoothing` parameter to the left.
 
-![step 11](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/11.png)
+![step 11](https://raw.githubusercontent.com/taloy42/TalPosts/main/tensorboard_guide/resources/images/11.png)
 
 
