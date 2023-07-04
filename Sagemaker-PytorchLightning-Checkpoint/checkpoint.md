@@ -104,7 +104,7 @@ class PLModule(pl.LightningModule):
         self.save_hyperparameters()
         ...
 ```
-wrap the model instantiation:
+wrap the model initialization:
 ```python
 model = PLModule(param1=value1, param2=value2)
 ```
