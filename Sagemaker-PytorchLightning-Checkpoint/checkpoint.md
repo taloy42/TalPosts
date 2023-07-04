@@ -161,5 +161,5 @@ def train(args):
         ...,
     )
 
-    trainer.fit(model=autoencoder, train_dataloaders=train_loader)
+    trainer.fit(model=model, train_dataloaders=train_loader)
 ```
