@@ -87,11 +87,9 @@ def get_checkpoint(args, verbose=True):
         if checkpoint is None:
             checkpoint_not_found_msg = "=======================================\ncheckpoint with epoch=`{:02d}` not found in `{}`:\n"
             print(checkpoint_not_found_msg.format(args.Epoch_start_num,args.checkpoint_path,checkpoints))
-
             for x in sorted(checkpoints,key=lambda x:(x[:8],os.path.getmtime(os.path.join(args.checkpoint_path,x)))):
                 print(f"{x} => {time.ctime(os.path.getmtime(os.path.join(args.checkpoint_path,x)))}")
-            print("=======================================")
-            
+            print("=======================================")        
         else:
             checkpoint_found_msg = "=======================================\nloading from checkpoint `{}`\n======================================="
             print(checkpoint_found_msg.format(checkpoint))
@@ -101,10 +99,10 @@ def get_checkpoint(args, verbose=True):
 assuming the module's name is `PLModule`:
 ```python
 class PLModule(pl.LightningModule):
-	def __init__(self, param1, param2):
-            super().__init__()
-            self.save_hyperparameters()
-            ...
+    def __init__(self, param1, param2):
+        super().__init__()
+        self.save_hyperparameters()
+        ...
 ```
 wrap the model instantiation:
 ```python
@@ -113,16 +111,55 @@ model = PLModule(param1=value1, param2=value2)
  with the following:
 ```python
 if  os.path.isdir(args.checkpoint_path):
-	print("Checkpointing directory {} exists".format(args.checkpoint_path))
-
+    print("Checkpointing directory {} exists".format(args.checkpoint_path))
 else:
-	print("Creating Checkpointing directory {}".format(args.checkpoint_path))
-	os.makedirs(args.checkpoint_path,exist_ok=True)
+    print("Creating Checkpointing directory {}".format(args.checkpoint_path))
+    os.makedirs(args.checkpoint_path,exist_ok=True)
 
 checkpoint = get_checkpoint(args)
-
+model_params = dict(
+    param1=value1,
+    param2=value2,
+)
 if checkpoint is None:
-	model = PLModule(param1=value1, param2=value2)
+	model = PLModule(**model_params)
 else:
-	model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),param1=value1,param2=value2)
+	model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),**model_params)
+```
+
+the `train` function should look like this:
+```python
+def train(args):
+    if os.path.isdir(args.checkpoint_path):
+        print("Checkpointing directory {} exists".format(args.checkpoint_path))
+    else:
+        print("Creating Checkpointing directory {}".format(args.checkpoint_path))
+        os.makedirs(args.checkpoint_path,exist_ok=True)
+        
+    checkpoint = get_checkpoint(args)
+    model_params = dict(
+        param1=value1,
+        param2=value2,
+    )
+    if checkpoint is None:
+        model = PLModule(**model_params)
+    else:
+        model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),**model_params)
+    train_loader = DataLoader(dataset)
+
+    checkpoint_callback = ModelCheckpoint(
+        dirpath=args.checkpoint_path,
+        filename="{epoch:02d}",
+        save_top_k=-1,
+        ...,
+    )
+
+    # train the model (hint: here are some helpful Trainer arguments for rapid idea iteration)
+    trainer = pl.Trainer(
+        max_epochs=args.epochs,
+        callbacks=[checkpoint_callback],
+        ...,
+    )
+
+    trainer.fit(model=autoencoder, train_dataloaders=train_loader)
 ```
