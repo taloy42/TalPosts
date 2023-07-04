@@ -122,9 +122,9 @@ model_params = dict(
     param2=value2,
 )
 if checkpoint is None:
-	model = PLModule(**model_params)
+    model = PLModule(**model_params)
 else:
-	model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),**model_params)
+    model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),**model_params)
 ```
 
 the `train` function should look like this:
