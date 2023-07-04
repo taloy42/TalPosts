@@ -102,7 +102,9 @@ assuming the module's name is `PLModule`:
 ```python
 class PLModule(pl.LightningModule):
 	def __init__(self, param1, param2):
-		...
+            super().__init__()
+            self.save_hyperparameters(ignore=['encoder','decoder'])
+            ...
 ```
 wrap the model instantiation:
 ```python
