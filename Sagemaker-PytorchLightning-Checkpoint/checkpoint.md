@@ -75,7 +75,7 @@ def get_checkpoint(args, verbose=True):
     checkpoints = os.listdir(args.checkpoint_path)
     checkpoint_options = []
     for c in checkpoints:
-        if f'epoch={args.checkpoint_epoch:02d}' in c:
+        if f'epoch={args.Epoch_start_num:02d}' in c:
             checkpoint_options.append(c)
 
     if len(checkpoint_options)<1:
@@ -86,7 +86,7 @@ def get_checkpoint(args, verbose=True):
     if verbose:
         if checkpoint is None:
             checkpoint_not_found_msg = "=======================================\ncheckpoint with epoch=`{:02d}` not found in `{}`:\n"
-            print(checkpoint_not_found_msg.format(args.checkpoint_epoch,args.checkpoint_path,checkpoints))
+            print(checkpoint_not_found_msg.format(args.Epoch_start_num,args.checkpoint_path,checkpoints))
 
             for x in sorted(checkpoints,key=lambda x:(x[:8],os.path.getmtime(os.path.join(args.checkpoint_path,x)))):
                 print(f"{x} => {time.ctime(os.path.getmtime(os.path.join(args.checkpoint_path,x)))}")
