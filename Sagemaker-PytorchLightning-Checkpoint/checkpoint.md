@@ -97,8 +97,8 @@ def get_checkpoint(args):
 assuming the module's name is `PLModule`:
 ```python
 class PLModule(pl.LightningModule):
-	def __init__(self, param1, param2):
-		...
+    def __init__(self, param1, param2):
+        ...
 ```
 wrap the model instantiation:
 ```python
@@ -107,16 +107,16 @@ model = PLModule(param1=value1, param2=value2)
  with the following:
 ```python
 if  os.path.isdir(args.checkpoint_path):
-	print("Checkpointing directory {} exists".format(args.checkpoint_path))
+    print("Checkpointing directory {} exists".format(args.checkpoint_path))
 
 else:
-	print("Creating Checkpointing directory {}".format(args.checkpoint_path))
-	os.makedirs(args.checkpoint_path,exist_ok=True)
+    print("Creating Checkpointing directory {}".format(args.checkpoint_path))
+    os.makedirs(args.checkpoint_path,exist_ok=True)
 
 checkpoint = get_checkpoint(args)
 
 if checkpoint is None:
-	model = PLModule(param1=value1, param2=value2)
+    model = PLModule(param1=value1, param2=value2)
 else:
-	model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),param1=value1,param2=value2)
+    model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),param1=value1,param2=value2)
 ```
