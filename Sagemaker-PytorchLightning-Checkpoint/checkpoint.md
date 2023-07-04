@@ -68,7 +68,10 @@ if __name__ == '__main__':
 ## Add the `get_checkpoint` function
 add the following function to the code:
 ```python
-def get_checkpoint(args):
+import os
+import time
+
+def get_checkpoint(args, verbose=True):
     checkpoints = os.listdir(args.checkpoint_path)
     checkpoint_options = []
     for c in checkpoints:
@@ -80,25 +83,26 @@ def get_checkpoint(args):
     else:
         checkpoint = max(checkpoint_options,key=lambda x:os.path.getmtime(os.path.join(args.checkpoint_path,x)))
 
-    if checkpoint is None:
-        checkpoint_not_found_msg = "=======================================\ncheckpoint with epoch=`{:02d}` not found in `{}`:\n"
-        print(checkpoint_not_found_msg.format(args.checkpoint_epoch,args.checkpoint_path,checkpoints))
+    if verbose:
+        if checkpoint is None:
+            checkpoint_not_found_msg = "=======================================\ncheckpoint with epoch=`{:02d}` not found in `{}`:\n"
+            print(checkpoint_not_found_msg.format(args.checkpoint_epoch,args.checkpoint_path,checkpoints))
 
-        for x in sorted(checkpoints,key=lambda x:(x[:8],os.path.getmtime(os.path.join(args.checkpoint_path,x)))):
-            print(f"{x} => {time.ctime(os.path.getmtime(os.path.join(args.checkpoint_path,x)))}")
-        print("=======================================")
+            for x in sorted(checkpoints,key=lambda x:(x[:8],os.path.getmtime(os.path.join(args.checkpoint_path,x)))):
+                print(f"{x} => {time.ctime(os.path.getmtime(os.path.join(args.checkpoint_path,x)))}")
+            print("=======================================")
             
-    else:
-        checkpoint_found_msg = "=======================================\nloading from checkpoint `{}`\n======================================="
-        print(checkpoint_found_msg.format(checkpoint))
+        else:
+            checkpoint_found_msg = "=======================================\nloading from checkpoint `{}`\n======================================="
+            print(checkpoint_found_msg.format(checkpoint))
     return checkpoint
 ```
 ## In the `train` function
 assuming the module's name is `PLModule`:
 ```python
 class PLModule(pl.LightningModule):
-    def __init__(self, param1, param2):
-        ...
+	def __init__(self, param1, param2):
+		...
 ```
 wrap the model instantiation:
 ```python
@@ -107,16 +111,16 @@ model = PLModule(param1=value1, param2=value2)
  with the following:
 ```python
 if  os.path.isdir(args.checkpoint_path):
-    print("Checkpointing directory {} exists".format(args.checkpoint_path))
+	print("Checkpointing directory {} exists".format(args.checkpoint_path))
 
 else:
-    print("Creating Checkpointing directory {}".format(args.checkpoint_path))
-    os.makedirs(args.checkpoint_path,exist_ok=True)
+	print("Creating Checkpointing directory {}".format(args.checkpoint_path))
+	os.makedirs(args.checkpoint_path,exist_ok=True)
 
 checkpoint = get_checkpoint(args)
 
 if checkpoint is None:
-    model = PLModule(param1=value1, param2=value2)
+	model = PLModule(param1=value1, param2=value2)
 else:
-    model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),param1=value1,param2=value2)
+	model = PLModule.load_from_checkpoint(os.path.join(args.checkpoint_path,checkpoint),param1=value1,param2=value2)
 ```
