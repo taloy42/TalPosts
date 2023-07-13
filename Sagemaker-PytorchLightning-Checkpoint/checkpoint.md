@@ -12,7 +12,7 @@ def copy_checkpoint(from_bucket, from_prefix, to_bucket, to_prefix, epoch_num):
     else:
         dest_bucket = source_bucket
     for obj in source_bucket.objects.filter(Prefix=from_prefix):
-        if str(epoch_num) in obj.key:
+        if f"epoch={epoch_num:02d}" in obj.key:
             old_source = { 'Bucket': from_bucket,
                    'Key': obj.key}
             
